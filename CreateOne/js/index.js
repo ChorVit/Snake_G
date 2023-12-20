@@ -50,6 +50,14 @@ function eatTail(head, arr){
         clearInterval(game)
     } 
 }
+let gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+gradient.addColorStop(0, "red");
+gradient.addColorStop(0.14, "orange");
+gradient.addColorStop(0.28, "yellow");
+gradient.addColorStop(0.42, "green");
+gradient.addColorStop(0.56, "blue");
+gradient.addColorStop(0.7, "indigo");
+gradient.addColorStop(1, "violet");
 
 function drawG(){
     ctx.drawImage(ground, 0, 0 )
@@ -60,7 +68,7 @@ function drawG(){
         //ctx.fillStyle = i == 0 ? 'black' : 'grey'
         ctx.beginPath();
         ctx.arc(snake[i].x + box / 2, snake[i].y + box / 2, box / 2, 0, 2 * Math.PI);
-        ctx.fillStyle = i === 0 ? 'black' : 'grey';
+        ctx.fillStyle = i === 0 ? 'black' : gradient;
         ctx.fill();
         ctx.closePath();
     }
@@ -77,7 +85,8 @@ function drawG(){
         food = {
             x: Math.floor((Math.random() * 17 + 1)) * box, 
             y: Math.floor((Math.random() * 15 + 3)) * box,
-        }
+        } 
+        someFoodImg = arrFood[Math.floor(Math.random() * arrFood.length)]
     }else{
         snake.pop();
     }
@@ -106,7 +115,7 @@ let game = setInterval(drawG, interval)
 
 
 function changeInterval(){
-    if(score === 5){
+    if(score === 2){
         interval = 100
         clearInterval(game)
         game = setInterval(drawG, interval)
